@@ -41,7 +41,7 @@ public class HUD {
 			30,
 			45
 		);
-		
+	
 	}
 	
 }
