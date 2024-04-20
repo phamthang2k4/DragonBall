@@ -1,12 +1,22 @@
+<<<<<<< HEAD
 /Audio/
 /Backgrounds/
 /Entity/
 /GameState/
 /HUD/
 /Main/
+=======
+/Backgrounds/
+/HUD/
+>>>>>>> main
 /Maps/
 /Music/
 /SFX/
 /Sprites/
+<<<<<<< HEAD
 /TileMap/
 /Tilesets/
+=======
+/Tilesets/
+/GameState/
+>>>>>>> main
