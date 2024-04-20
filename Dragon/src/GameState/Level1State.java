@@ -32,7 +32,7 @@ public class Level1State extends GameState {
 	public void init() {
 		
 		tileMap = new TileMap(30);
-		tileMap.loadTiles("/Tilesets/grasstileset.gif");
+		tileMap.loadTiles("/Tilesets/test10.png");
 		tileMap.loadMap("/Maps/level1-1.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
@@ -59,11 +59,14 @@ public class Level1State extends GameState {
 		
 		Slugger s;
 		Point[] points = new Point[] {
-			new Point(200, 100),
+			new Point(200, 200),
 			new Point(860, 200),
+			new Point(1000, 200),
 			new Point(1525, 200),
 			new Point(1680, 200),
-			new Point(1800, 200)
+			new Point(1800, 200),
+			new Point(2800, 200),
+			new Point(3150, 200)
 		};
 		for(int i = 0; i < points.length; i++) {
 			s = new Slugger(tileMap);
