@@ -5,28 +5,36 @@ import TileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MenuState extends GameState {
+import Audio.AudioPlayer;
+import Main.GamePanel;
+
+public class Winner extends GameState {
 	
 	private Background bg;
 	
 	private int currentChoice = 0;
 	private String[] options = {
-		"Start",
+		"Press enter to turn back",
 		"Quit"
 	};
 	
-
+	
 	
 	private Font font;
 	
-	public MenuState(GameStateManager gsm) {
+	private AudioPlayer bgMusic;
+	
+	public Winner(GameStateManager gsm) {
 		
 		this.gsm = gsm;
 		
 		try {
 			
-			bg = new Background("/Backgrounds/Background.png", 1);
-					
+			bg = new Background("/Backgrounds/victory_bg.png", 1);
+			bg.setVector(0.2, 0);
+			
+		
+				 
 			
 			font = new Font("Arial", Font.PLAIN, 12);
 			
@@ -34,10 +42,14 @@ public class MenuState extends GameState {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		init();
 		
 	}
 	
-	public void init() {}
+	public void init() {
+		bgMusic = new AudioPlayer("/Music/you_win.mp3");
+		bgMusic.play();
+	}
 	
 	public void update() {
 		bg.update();
@@ -48,7 +60,7 @@ public class MenuState extends GameState {
 		// draw bg
 		bg.draw(g);
 		
-	
+		
 		
 		// draw menu options
 		g.setFont(font);
@@ -59,7 +71,18 @@ public class MenuState extends GameState {
 			else {
 				g.setColor(new Color(198, 29, 29));
 			}
-			g.drawString(options[i], 145, 200 + i * 15);
+//			g.drawString(options[i], x-160, 140 + i * 15);
+			
+			 // Lấy FontMetrics từ Graphics
+            FontMetrics metrics = g.getFontMetrics(font);
+
+            // Lấy kích thước của mỗi lựa chọn menu
+            int optionWidth = metrics.stringWidth(options[i]);
+            int optionHeight = metrics.getHeight();
+            int x = (GamePanel.WIDTH * GamePanel.SCALE - optionWidth) / 2; // Căn lề 2 bên
+
+            g.drawString(options[i], x - 160, 140 + i * (optionHeight + 5));
+            // Sử dụng optionHeight để căn chỉnh văn bản
 		}
 		
 	}
@@ -67,6 +90,7 @@ public class MenuState extends GameState {
 	private void select() {
 		if(currentChoice == 0) {
 			gsm.setState(GameStateManager.LEVEL1STATE);
+			bgMusic.stop();
 		}
 		if(currentChoice == 1) {
 			System.exit(0);
@@ -93,13 +117,3 @@ public class MenuState extends GameState {
 	public void keyReleased(int k) {}
 	
 }
-
-
-
-
-
-
-
-
-
-

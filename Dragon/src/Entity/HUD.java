@@ -16,7 +16,7 @@ public class HUD {
 		try {
 			image = ImageIO.read(
 				getClass().getResourceAsStream(
-					"/HUD/hud.gif"
+					"/HUD/live.png"
 				)
 			);
 			font = new Font("Arial", Font.PLAIN, 14);
@@ -35,11 +35,6 @@ public class HUD {
 			player.getHealth() + "/" + player.getMaxHealth(),
 			30,
 			25
-		);
-		g.drawString(
-			player.getFire() / 100 + "/" + player.getMaxFire() / 100,
-			30,
-			45
 		);
 	
 	}

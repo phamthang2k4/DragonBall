@@ -117,14 +117,31 @@ public class Level2State2 extends GameState {
 				i--;
 			}
 		}
-		 if (playerReachedEndOfMap1()) {
+		
+		
+		if(playerHo()) {
+			 gsm.setState(GameStateManager.GAMEOVER);
+		 }
+		
+		 if (playerReachedEndOfMap2()) {
 		        
-		        gsm.setState(GameStateManager.GAMEOVER);
+		        gsm.setState(GameStateManager.WINNER);
 		    }
+		
+		 
 		
 	}
 	
-private boolean playerReachedEndOfMap1() {
+	private boolean playerHo() {
+		 
+		 double playerY = player.gety();
+		 int endYOfMap1 = 200;
+		 
+		 return playerY > endYOfMap1 ;
+		 
+	}
+	
+private boolean playerReachedEndOfMap2() {
 		
 		
 		

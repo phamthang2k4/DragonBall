@@ -14,8 +14,7 @@ public class Player extends MapObject {
 	// player stuff
 	private int health;
 	private int maxHealth;
-	private int fire;
-	private int maxFire;
+
 	private boolean dead;
 	private boolean flinching;
 	private long flinchTimer;
@@ -24,7 +23,6 @@ public class Player extends MapObject {
 	private boolean firing;
 	private int fireCost;
 	private int fireBallDamage;
-	private ArrayList<FireBall> fireBalls;
 	
 	// scratch
 	private boolean scratching;
@@ -71,11 +69,9 @@ public class Player extends MapObject {
 		facingRight = true;
 		
 		health = maxHealth = 5;
-		fire = maxFire = 2500;
 		
 		fireCost = 200;
 		fireBallDamage = 5;
-		fireBalls = new ArrayList<FireBall>();
 		
 		scratchDamage = 8;
 		scratchRange = 40;
@@ -138,9 +134,7 @@ public class Player extends MapObject {
 	
 	public int getHealth() { return health; }
 	public int getMaxHealth() { return maxHealth; }
-	public int getFire() { return fire; }
-	public int getMaxFire() { return maxFire; }
-	
+
 	public void setFiring() { 
 		firing = true;
 	}
@@ -179,15 +173,6 @@ public class Player extends MapObject {
 					) {
 						e.hit(scratchDamage);
 					}
-				}
-			}
-			
-			// fireballs
-			for(int j = 0; j < fireBalls.size(); j++) {
-				if(fireBalls.get(j).intersects(e)) {
-					e.hit(fireBallDamage);
-					fireBalls.get(j).setHit();
-					break;
 				}
 			}
 			
@@ -283,27 +268,6 @@ public class Player extends MapObject {
 			if(animation.hasPlayedOnce()) firing = false;
 		}
 		
-		// fireball attack
-		fire += 1;
-		if(fire > maxFire) fire = maxFire;
-		if(firing && currentAction != FIREBALL) {
-			if(fire > fireCost) {
-				fire -= fireCost;
-				FireBall fb = new FireBall(tileMap, facingRight);
-				fb.setPosition(x, y);
-				fireBalls.add(fb);
-			}
-		}
-		
-		// update fireballs
-		for(int i = 0; i < fireBalls.size(); i++) {
-			fireBalls.get(i).update();
-			if(fireBalls.get(i).shouldRemove()) {
-				fireBalls.remove(i);
-				i--;
-			}
-		}
-		
 		// check done flinching
 		if(flinching) {
 			long elapsed =
@@ -380,30 +344,14 @@ public class Player extends MapObject {
 			if(left) facingRight = false;
 		}
 		
-		if (health == 0) {
-            // Nếu health của Player xuống 0, kết thúc trò chơi
-            //endGame();
-        }
-		
 	}
 	public boolean player_die() {
 		return health == 0;
 	}
 	
-	private void endGame() {
-        // Thực hiện các thao tác để kết thúc trò chơi
-		
-        System.exit(0); // Đây là một cách đơn giản để thoát game
-    }
-	
 	public void draw(Graphics2D g) {
 		
 		setMapPosition();
-		
-		// draw fireballs
-		for(int i = 0; i < fireBalls.size(); i++) {
-			fireBalls.get(i).draw(g);
-		}
 		
 		// draw player
 		if(flinching) {

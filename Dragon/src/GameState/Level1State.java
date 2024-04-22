@@ -83,7 +83,7 @@ public class Level1State extends GameState {
 		
 		if(player.player_die()) {
 			bgMusic.stop();
-			gsm.setState(2);
+			gsm.setState(GameStateManager.GAMEOVER);
 		}
 		
 		tileMap.setPosition(
@@ -119,7 +119,7 @@ public class Level1State extends GameState {
 		}
 		
 		 if(playerHo()) {
-			 gsm.setState(GameStateManager.LEVEL1STATE);
+			 gsm.setState(GameStateManager.GAMEOVER);
 		 }
 		
 		 if (playerReachedEndOfMap1()) {

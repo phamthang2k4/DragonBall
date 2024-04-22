@@ -14,12 +14,11 @@ public class GameOver extends GameState {
 	
 	private int currentChoice = 0;
 	private String[] options = {
-		"Press ENTER to turn back",
+		"Press enter to turn back",
 		"Quit"
 	};
 	
-	private Color titleColor;
-	private Font titleFont;
+
 	
 	private Font font;
 	
@@ -31,14 +30,10 @@ public class GameOver extends GameState {
 		
 		try {
 			
-			bg = new Background("/Backgrounds/menubg.gif", 1);
-			bg.setVector(-0.1, 0);
+			bg = new Background("/Backgrounds/gameover_bg.png", 1);
+			bg.setVector(0.4, 0);
 			
-			titleColor = new Color(128, 0, 0);
-			titleFont = new Font(
-					"Century Gothic",
-					Font.PLAIN,
-					28);
+		
 			
 			font = new Font("Arial", Font.PLAIN, 12);
 			
@@ -64,19 +59,17 @@ public class GameOver extends GameState {
 		// draw bg
 		bg.draw(g);
 		
-		// draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("GAME OVER", 80, 70);
+	
+
 		
 		// draw menu options
 		g.setFont(font);
 		for(int i = 0; i < options.length; i++) {
 			if(i == currentChoice) {
-				g.setColor(Color.RED);
+				g.setColor(new Color(23, 121, 27));
 			}
 			else {
-				g.setColor(Color.WHITE);
+				g.setColor(new Color(198, 29, 29));
 			}
 //			g.drawString(options[i], x-160, 140 + i * 15);
 			
