@@ -21,8 +21,6 @@ public class Player extends MapObject {
 	
 	// fireball
 	private boolean firing;
-	private int fireCost;
-	private int fireBallDamage;
 	
 	// scratch
 	private boolean scratching;
@@ -44,7 +42,7 @@ public class Player extends MapObject {
 	private static final int JUMPING = 2;
 	private static final int FALLING = 3;
 	private static final int GLIDING = 4;
-	private static final int FIREBALL = 5;
+	private static final int FIRE = 5;
 	private static final int SCRATCHING = 6;
 	
 	private HashMap<String, AudioPlayer> sfx;
@@ -69,9 +67,6 @@ public class Player extends MapObject {
 		facingRight = true;
 		
 		health = maxHealth = 5;
-		
-		fireCost = 200;
-		fireBallDamage = 5;
 		
 		scratchDamage = 8;
 		scratchRange = 40;
@@ -157,9 +152,7 @@ public class Player extends MapObject {
 				if(facingRight) {
 					if(
 						e.getx() > x &&
-						e.getx() < x + scratchRange && 
-						e.gety() > y - height / 2 &&
-						e.gety() < y + height / 2
+						e.getx() < x + scratchRange 
 					) {
 						e.hit(scratchDamage);
 					}
@@ -167,9 +160,7 @@ public class Player extends MapObject {
 				else {
 					if(
 						e.getx() < x &&
-						e.getx() > x - scratchRange &&
-						e.gety() > y - height / 2 &&
-						e.gety() < y + height / 2
+						e.getx() > x - scratchRange
 					) {
 						e.hit(scratchDamage);
 					}
@@ -226,7 +217,7 @@ public class Player extends MapObject {
 		
 		// cannot move while attacking, except in air
 		if(
-		(currentAction == SCRATCHING || currentAction == FIREBALL) &&
+		(currentAction == SCRATCHING || currentAction == FIRE) &&
 		!(jumping || falling)) {
 			dx = 0;
 		}
@@ -264,9 +255,17 @@ public class Player extends MapObject {
 		if(currentAction == SCRATCHING) {
 			if(animation.hasPlayedOnce()) scratching = false;
 		}
-		if(currentAction == FIREBALL) {
-			if(animation.hasPlayedOnce()) firing = false;
-		}
+		if (currentAction == FIRE) {
+	        if (animation.hasPlayedOnce()) {
+	            firing = false;
+	            // Tăng health khi đánh FIRE
+	            health += 1;
+	            // Đảm bảo health không vượt quá maxHealth
+	            if (health > maxHealth) {
+	                health = maxHealth;
+	            }
+	        }
+	    }
 		
 		// check done flinching
 		if(flinching) {
@@ -288,9 +287,9 @@ public class Player extends MapObject {
 			}
 		}
 		else if(firing) {
-			if(currentAction != FIREBALL) {
-				currentAction = FIREBALL;
-				animation.setFrames(sprites.get(FIREBALL));
+			if(currentAction != FIRE) {
+				currentAction = FIRE;
+				animation.setFrames(sprites.get(FIRE));
 				animation.setDelay(100);
 				width = 30;
 			}
@@ -339,7 +338,7 @@ public class Player extends MapObject {
 		animation.update();
 		
 		// set direction
-		if(currentAction != SCRATCHING && currentAction != FIREBALL) {
+		if(currentAction != SCRATCHING && currentAction != FIRE) {
 			if(right) facingRight = true;
 			if(left) facingRight = false;
 		}
