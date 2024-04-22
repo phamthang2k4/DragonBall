@@ -32,12 +32,12 @@ public class Level2State2 extends GameState {
 	public void init() {
 		
 		tileMap = new TileMap(30);
-		tileMap.loadTiles("/Tilesets/test10.png");
-		tileMap.loadMap("/Maps/level1-1.map");
+		tileMap.loadTiles("/Tilesets/image.png");
+		tileMap.loadMap("/Maps/level2-2.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
-		bg = new Background("/Backgrounds/grassbg1.gif", 0.1);
+		bg = new Background("/Backgrounds/bgmap2.png", 0.1);
 		
 		player = new Player(tileMap);
 		player.setPosition(100, 100);
@@ -59,14 +59,13 @@ public class Level2State2 extends GameState {
 		
 		Slugger s;
 		Point[] points = new Point[] {
-			new Point(200, 200),
 			new Point(860, 200),
 			new Point(1000, 200),
-			new Point(1525, 200),
+			new Point(1580, 20),
 			new Point(1680, 200),
 			new Point(1800, 200),
-			new Point(2800, 200),
-			new Point(3150, 200)
+			new Point(2650, 200),
+			new Point(3000, 50)
 		};
 		for(int i = 0; i < points.length; i++) {
 			s = new Slugger(tileMap);
@@ -83,7 +82,7 @@ public class Level2State2 extends GameState {
 		
 		if(player.player_die()) {
 			bgMusic.stop();
-			gsm.setState(2);
+			gsm.setState(GameStateManager.GAMEOVER);
 		}
 		
 		tileMap.setPosition(
@@ -135,9 +134,9 @@ public class Level2State2 extends GameState {
 	private boolean playerHo() {
 		 
 		 double playerY = player.gety();
-		 int endYOfMap1 = 200;
+		 int endYOfMap2 = 200;
 		 
-		 return playerY > endYOfMap1 ;
+		 return playerY > endYOfMap2 ;
 		 
 	}
 	

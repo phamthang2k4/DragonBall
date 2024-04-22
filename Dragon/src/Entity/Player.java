@@ -81,7 +81,7 @@ public class Player extends MapObject {
 			
 			BufferedImage spritesheet = ImageIO.read(
 				getClass().getResourceAsStream(
-					"/Sprites/Player/playersprites.gif"
+					"/Sprites/Player/player.png"
 				)
 			);
 			

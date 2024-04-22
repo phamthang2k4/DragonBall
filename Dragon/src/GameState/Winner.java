@@ -81,7 +81,7 @@ public class Winner extends GameState {
             int optionHeight = metrics.getHeight();
             int x = (GamePanel.WIDTH * GamePanel.SCALE - optionWidth) / 2; // Căn lề 2 bên
 
-            g.drawString(options[i], x - 160, 140 + i * (optionHeight + 5));
+            g.drawString(options[i], x - 160, 180 + i * (optionHeight + 5));
             // Sử dụng optionHeight để căn chỉnh văn bản
 		}
 		
