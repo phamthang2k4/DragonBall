@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Level1State extends GameState {
+public class Level2State2 extends GameState {
 	
 	private TileMap tileMap;
 	private Background bg;
@@ -24,7 +24,7 @@ public class Level1State extends GameState {
 	
 	private AudioPlayer bgMusic;
 	
-	public Level1State(GameStateManager gsm) {
+	public Level2State2(GameStateManager gsm) {
 		this.gsm = gsm;
 		init();
 	}
@@ -117,21 +117,17 @@ public class Level1State extends GameState {
 				i--;
 			}
 		}
-		
-		 if(playerHo()) {
-			 gsm.setState(GameStateManager.LEVEL1STATE);
-		 }
-		
 		 if (playerReachedEndOfMap1()) {
 		        
-		        gsm.setState(GameStateManager.LEVEL2STATE);
+		        gsm.setState(GameStateManager.GAMEOVER);
 		    }
 		
 	}
-	private boolean playerReachedEndOfMap1() {
+	
+private boolean playerReachedEndOfMap1() {
 		
 		
-
+		
 	    // Lấy vị trí hiện tại của người chơi
 	    double playerX = player.getx();
 	    double playerY = player.gety();
@@ -143,17 +139,7 @@ public class Level1State extends GameState {
 	   
 	    return playerX >= endXOfMap1 && playerY <= endYOfMap1;
 	}
-	
-	private boolean playerHo() {
-		 
-		 double playerY = player.gety();
-		 int endYOfMap1 = 200;
-		 
-		 return playerY > endYOfMap1 ;
-		 
-	}
 
-	
 	public void draw(Graphics2D g) {
 		
 		// draw bg
