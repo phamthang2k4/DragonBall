@@ -46,7 +46,7 @@ public class GameOver extends GameState {
 	}
 	
 	public void init() {
-		bgMusic = new AudioPlayer("/Music/you_win.mp3");
+		bgMusic = new AudioPlayer("/Music/gameover.mp3");
 		bgMusic.play();
 	}
 	
