@@ -80,6 +80,12 @@ public class Level1State extends GameState {
 		
 		// update player
 		player.update();
+		
+		if(player.player_die()) {
+			bgMusic.stop();
+			gsm.setState(2);
+		}
+		
 		tileMap.setPosition(
 			GamePanel.WIDTH / 2 - player.getx(),
 			GamePanel.HEIGHT / 2 - player.gety()

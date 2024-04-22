@@ -382,13 +382,17 @@ public class Player extends MapObject {
 		
 		if (health == 0) {
             // Nếu health của Player xuống 0, kết thúc trò chơi
-            endGame();
+            //endGame();
         }
 		
+	}
+	public boolean player_die() {
+		return health == 0;
 	}
 	
 	private void endGame() {
         // Thực hiện các thao tác để kết thúc trò chơi
+		
         System.exit(0); // Đây là một cách đơn giản để thoát game
     }
 	

@@ -7,9 +7,10 @@ public class GameStateManager {
 	private GameState[] gameStates;
 	private int currentState;
 	
-	public static final int NUMGAMESTATES = 2;
+	public static final int NUMGAMESTATES = 3;
 	public static final int MENUSTATE = 0;
 	public static final int LEVEL1STATE = 1;
+	public static final int GAMEOVER = 2;
 	
 	public GameStateManager() {
 		
@@ -25,6 +26,8 @@ public class GameStateManager {
 			gameStates[state] = new MenuState(this);
 		if(state == LEVEL1STATE)
 			gameStates[state] = new Level1State(this);
+		if(state == GAMEOVER)
+			gameStates[state] = new GameOver(this);
 	}
 	
 	private void unloadState(int state) {
@@ -51,11 +54,13 @@ public class GameStateManager {
 	}
 	
 	public void keyPressed(int k) {
-		gameStates[currentState].keyPressed(k);
+		if (gameStates[currentState] != null) 
+			gameStates[currentState].keyPressed(k);
 	}
 	
 	public void keyReleased(int k) {
-		gameStates[currentState].keyReleased(k);
+		if (gameStates[currentState] != null) 
+			gameStates[currentState].keyReleased(k);
 	}
 	
 }
